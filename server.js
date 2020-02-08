@@ -17,9 +17,16 @@ app.use(
 );
 app.use(bodyParser.json());
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
- }
+// ALLOW CORS
+const allowCrossDomain = function(req, res, next) {
+  console.log("it's CORS, bitch")
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+};
+
+app.use(allowCrossDomain);
 
 // DB Config
 const db = require("./config/keys").mongoURI;
@@ -39,13 +46,16 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-// Routes
+// Routes 
+app.get("/ping", (reg, res) => res.sendStatus(200));
+
 app.use("/api/users", users);
 app.use("/api/v1/games", games);
 
-app.use("*", (req, res) =>
- res.sendFile(path.join(__dirname, "../client/build/index.html"))
-);
+
+// app.use("*", (req, res) =>
+//  res.sendStatus(404)
+// );
 
 const port = process.env.PORT || 5000;
 
