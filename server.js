@@ -6,6 +6,7 @@ const passport = require("passport");
 
 const users = require("./routes/api/users");
 const games = require("./routes/api/games");
+const items = require("./routes/api/items");
 
 const app = express();
 
@@ -47,10 +48,15 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes 
-app.get("/ping", (reg, res) => res.sendStatus(200));
+app.get("/ping", function (reg, res) {
+  console.log("ping!!!!")
+  res.sendStatus(200);
+}) 
+
 
 app.use("/api/users", users);
 app.use("/api/v1/games", games);
+app.use("api/additem", items)
 
 
 // app.use("*", (req, res) =>
