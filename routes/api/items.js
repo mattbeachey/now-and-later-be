@@ -12,7 +12,8 @@ const validateLoginInput = require("../../validation/login");
 const User = require("../../models/User");
 
 router.post("/:userId", (req, res) => {
-    console.log(req.params.userId)
+    console.log(req.params.userId, req.body)
+    User.find({})
     .then( function(){
         res.json("got it")
     })
