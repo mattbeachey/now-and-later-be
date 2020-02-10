@@ -23,7 +23,7 @@ const allowCrossDomain = function(req, res, next) {
   console.log("it's CORS, bitch")
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
   next();
 };
 
