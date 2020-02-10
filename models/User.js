@@ -18,7 +18,17 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  }, 
+  saved_timestamps: [
+    {
+      url: String,
+      title: String,
+      notes: String,
+      tags: [{
+        type: String
+      }]
+    }
+  ]
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

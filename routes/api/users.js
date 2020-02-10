@@ -12,13 +12,6 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
-router.get("/", (req, res) => {
-  console.log("is it working")
-  User.find({})
-  .then(users => res.json(users))
-  .catch(err => console.log(err));
-})
-
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -62,7 +55,7 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/login", (req, res) => {
   // Form validation
-
+  console.log("token => ", req.headers);
   const { errors, isValid } = validateLoginInput(req.body);
 
   // Check validation

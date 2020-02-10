@@ -56,7 +56,7 @@ app.get("/ping", function (reg, res) {
 
 app.use("/api/users", users);
 app.use("/api/v1/games", games);
-app.use("/api/additem", items)
+app.use("/api/items", items)
 
 
 // app.use("*", (req, res) =>
