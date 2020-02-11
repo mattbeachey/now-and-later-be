@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     {
       url: String,
       videoThumbnail: String,
+      videoName: String,
       title: String,
       notes: String,
       tags: [{

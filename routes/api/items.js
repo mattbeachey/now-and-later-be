@@ -54,7 +54,22 @@ router.delete("/delete/:id", async (req, res) => {
   } catch (err) {
     res.json(new Error(err))
   }  
-
 })
+
+//update array item by id route and array key
+router.put("/update/:id", async (req, res) => {
+  const itemId = req.params.id.split("-")[0]
+  const userId = req.params.id.split("-")[1]
+  try{
+    const dbUser = await User.findByIdAndUpdate(
+      userId,
+      {$set: {"saved_timestamps" : {_id: itemId}}}
+    )
+    res.json({message: "working on it"})
+  } catch (err) {
+    res.json(new Error(err))
+  }  
+})
+
 
 module.exports = router;
