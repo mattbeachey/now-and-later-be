@@ -41,17 +41,20 @@ router.get("/get/:userId", (req, res) => {
   .catch(err => console.log(err));
 })
 
-//delete by id route
-router.delete("/delete/:id", (req, res) => {
+//delete array item by id route
+router.delete("/delete/:id", async (req, res) => {
   const itemId = req.params.id.split("-")[0]
   const userId = req.params.id.split("-")[1]
-  console.log(itemId)
-  console.log(userId)
-  User.where('_id', req.params.userId).update({ }, {$pull: {"saved_timestamps": {_id: itemId}}})
-  // User.findByIdAndRemove(req.params.itemId)
-  .then(function(){
-    res.json("did it")
-  })
+  try{
+    const dbUser = await User.findByIdAndUpdate(
+      userId,
+      {$pull: {"saved_timestamps" : {_id: itemId}}}
+    )
+    res.json({message: "working on it"})
+  } catch (err) {
+    res.json(new Error(err))
+  }  
+
 })
 
 module.exports = router;
