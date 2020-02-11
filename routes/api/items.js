@@ -32,13 +32,26 @@ router.put("/add/:userId", (req, res) => {
 
 //route to retrieve all saved items of one user
 router.get("/get/:userId", (req, res) => {
-  console.log(req.params.userId)
+  console.log("getting all items" + req.params.userId)
   User.findById(req.params.userId)
   .then( data => {
     console.log(data)
     res.json(data)
   })
   .catch(err => console.log(err));
+})
+
+//delete by id route
+router.delete("/delete/:id", (req, res) => {
+  const itemId = req.params.id.split("-")[0]
+  const userId = req.params.id.split("-")[1]
+  console.log(itemId)
+  console.log(userId)
+  User.where('_id', req.params.userId).update({ }, {$pull: {"saved_timestamps": {_id: itemId}}})
+  // User.findByIdAndRemove(req.params.itemId)
+  .then(function(){
+    res.json("did it")
+  })
 })
 
 module.exports = router;
