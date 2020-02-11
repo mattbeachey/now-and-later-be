@@ -22,6 +22,7 @@ const UserSchema = new Schema({
   saved_timestamps: [
     {
       url: String,
+      videoThumbnail: String,
       title: String,
       notes: String,
       tags: [{
