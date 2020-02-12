@@ -4,10 +4,15 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
+//env variables
+const dotenv = require("dotenv").config();
+console.log(process.env)
+
 const users = require("./routes/api/users");
 const items = require("./routes/api/items");
 
 const app = express();
+
 
 // Bodyparser middleware
 app.use(
